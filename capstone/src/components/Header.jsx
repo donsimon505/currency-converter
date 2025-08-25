@@ -1,66 +1,8 @@
 import { useState } from "react";
-import {
-  Dialog,
-  DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
-} from "@headlessui/react";
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
-
-const products = [
-  {
-    name: "Analytics",
-    description: "Get a better understanding of your traffic",
-    href: "#",
-    icon: ChartPieIcon,
-  },
-  {
-    name: "Engagement",
-    description: "Speak directly to your customers",
-    href: "#",
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: "Security",
-    description: "Your customers’ data will be safe and secure",
-    href: "#",
-    icon: FingerPrintIcon,
-  },
-  {
-    name: "Integrations",
-    description: "Connect with third-party tools",
-    href: "#",
-    icon: SquaresPlusIcon,
-  },
-  {
-    name: "Automations",
-    description: "Build strategic funnels that will convert",
-    href: "#",
-    icon: ArrowPathIcon,
-  },
-];
-const callsToAction = [
-  { name: "Watch demo", href: "#", icon: PlayCircleIcon },
-  { name: "Contact sales", href: "#", icon: PhoneIcon },
-];
+import { Dialog, DialogPanel } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -71,7 +13,7 @@ function Header() {
         className="mx-auto flex lg:min-h-[11vh] max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex flex-row lg:flex-1 self-center">
-          <a href="#" className="-m-1.5 p-1.5 items-center">
+          <Link to="/" className="-m-1.5 p-1.5 items-center">
             <span className="sr-only">Currency Converter</span>
             <div className="flex flex-row gap-[10px] md:gap-[18px] items-center">
               <img
@@ -83,7 +25,7 @@ function Header() {
                 Currency Converter
               </h3>
             </div>
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -98,22 +40,29 @@ function Header() {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-[25px] items-center">
           <ul className="flex justify-end space-x-[25px] basis-4/12 text-xs sm:text-xs lg:text-sm md:text-sm">
             <li>
-              <a href="#" className="text-sm/6 font-semibold text-gray-900">
+              <Link
+                to="/"
+                className="text-sm/6 font-semibold text-gray-900 hover:text-blue-600"
+              >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-sm/6 font-semibold text-gray-900">
+              <HashLink
+                smooth
+                to="/#features"
+                className="text-sm/6 font-semibold text-gray-900 hover:text-blue-600"
+              >
                 Features
-              </a>
+              </HashLink>
             </li>
           </ul>
-          <a
-            href="#"
+          <Link
+            to="/sign-up"
             className="bg-blue-600 text-sm/6 font-medium py-[10px] px-[19px] text-white rounded-md"
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </nav>
       <Dialog
@@ -124,9 +73,9 @@ function Header() {
         <div className="fixed inset-0 z-50" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Currency Converter</span>
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -139,53 +88,27 @@ function Header() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <Disclosure as="div" className="-mx-3">
-                  <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
-                    Product
-                    <ChevronDownIcon
-                      aria-hidden="true"
-                      className="size-5 flex-none group-data-open:rotate-180"
-                    />
-                  </DisclosureButton>
-                  <DisclosurePanel className="mt-2 space-y-2">
-                    {[...products, ...callsToAction].map((item) => (
-                      <DisclosureButton
-                        key={item.name}
-                        as="a"
-                        href={item.href}
-                        className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50"
-                      >
-                        {item.name}
-                      </DisclosureButton>
-                    ))}
-                  </DisclosurePanel>
-                </Disclosure>
-                <a
-                  href="#"
+                <Link
+                  to="/"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  Home
+                </Link>
+                <HashLink
+                  smooth
+                  to="/#features"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Features
-                </a>
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                >
-                  Marketplace
-                </a>
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                >
-                  Company
-                </a>
+                </HashLink>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
+                <Link
+                  to="/sign-up"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
-                  Log in
-                </a>
+                  Get Started
+                </Link>
               </div>
             </div>
           </div>

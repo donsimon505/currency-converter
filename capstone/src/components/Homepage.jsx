@@ -5,6 +5,7 @@ import {
   StarIcon,
   PresentationChartLineIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 function Homepage() {
   return (
@@ -26,13 +27,13 @@ function Homepage() {
                 user-friendly interface for all your currency conversion needs.
               </p>
             </div>
-            <a
-              href="#"
+            <Link
+              to="/sign-up"
               className="px-[24px] md:px-[17px] lg:px-[24px] py-[18px] md:py-[14px] lg:py-[18px] font-medium text-lg md:text-sm rounded-md
                bg-white text-blue-600"
             >
               Start Converting
-            </a>
+            </Link>
           </div>
           <div className="basis-1/2">
             <img src="./src/assets/hero-img.jpg" alt="" className="h-full" />
@@ -41,7 +42,10 @@ function Homepage() {
       </div>
 
       {/* Feature Section */}
-      <div className="flex flex-col px-6 lg:px-8 py-[50px] lg:py-[80px] mx-auto max-w-7xl gap-12">
+      <div
+        className="flex flex-col px-6 lg:px-8 py-[50px] lg:py-[80px] mx-auto max-w-7xl gap-12"
+        id="features"
+      >
         <div className="flex flex-col text-center justify-center items-center">
           <h2 className="text-4xl/11 font-semibold text-blue-600 pb-[14px]">
             Key Features
@@ -91,7 +95,7 @@ function Homepage() {
         className="relative flex flex-col px-6 lg:px-8 py-[120px] lg:py-[80px] gap-12 bg-[url(./src/assets/cta.jpg)] bg-no-repeat bg-cover
        bg-center text-white lg:min-h-[64vh] justify-center"
       >
-        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="flex flex-col text-center justify-center items-center gap-6 z-50">
           <div>
             <h2 className="text-4xl/11 font-semibold pb-[14px]">
@@ -102,13 +106,13 @@ function Homepage() {
               interface for all your currency conversion needs.
             </p>
           </div>
-          <a
-            href="#"
-            className="px-[24px] md:px-[17px] lg:px-[24px] py-[18px] md:py-[14px] lg:py-[18px] font-medium text-lg md:text-sm rounded-md
+          <Link
+            to="/sign-up"
+            className="px-[24px] md:px-[17px] lg:px-[24px] py-[18px] md:py-[14px] lg:py-[16px] font-medium text-lg md:text-sm rounded-md
                bg-white text-black"
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
       <Footer />
