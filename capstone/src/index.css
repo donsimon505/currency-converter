@@ -4,3 +4,15 @@
 body {
   font-family: "Inter", sans-serif;
 }
+
+.menu-hover {
+  @apply hover:bg-blue-100 hover:text-blue-600 hover:rounded-sm;
+}
+
+.menu-active {
+  @apply bg-blue-100 text-blue-600 rounded-sm;
+}
+
+.sidebar-menu {
+  @apply flex gap-[14px] items-center p-[14px];
+}
