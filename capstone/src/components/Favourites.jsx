@@ -1,9 +1,10 @@
 import Sidebar from "./Sidebar";
 import DashboardMobileMenu from "./DashboardMobileMenu";
-import Converter from "./Converter";
+import FavouriteCurrenciesCard from "./FavouriteCurrenciesCard";
+import AllCurrenciesCard from "./AllCurrenciesCard";
 import Footer from "./Footer";
 
-function Dashboard() {
+function Favourites() {
   return (
     <>
       <DashboardMobileMenu />
@@ -16,13 +17,17 @@ function Dashboard() {
           >
             <div className="flex flex-col gap-[6px] text-center lg:text-left">
               <h1 className="text-4xl lg:text-3xl font-semibold text-blue-600">
-                Welcome John
+                Settings
               </h1>
               <p className="text-base md:text-lg font-normal text-neutral-500">
-                Convert currencies with ease and confidence
+                Manage your favourite currencies
               </p>
             </div>
-            <Converter />
+
+            <div className="favourite-section flex flex-col lg:flex-row gap-[50px]">
+              <FavouriteCurrenciesCard />
+              <AllCurrenciesCard />
+            </div>
           </div>
           <div className="lg:hidden">
             <Footer />
@@ -33,4 +38,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Favourites;

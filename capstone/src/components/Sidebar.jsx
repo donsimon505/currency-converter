@@ -34,12 +34,12 @@ function Sidebar() {
                   <HomeIcon className="size-4" /> Dashboard
                 </li>
               </Link>
-              <Link to="/dashboard">
+              <Link to="/favourites">
                 <li className="sidebar-menu menu-hover">
                   <CurrencyDollarIcon className="size-4" /> Favourites
                 </li>
               </Link>
-              <Link to="/dashboard">
+              <Link to="/settings">
                 <li className="sidebar-menu menu-hover">
                   <CogIcon className="size-4" /> Settings
                 </li>

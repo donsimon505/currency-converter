@@ -52,7 +52,7 @@ function SignUp() {
                   />
                 </div>
 
-                <div className="pb-[26px]">
+                <div className="pb-[30px]">
                   <label
                     htmlFor="password"
                     className="block font-medium text-left text-sm pb-[10px]"
@@ -67,7 +67,7 @@ function SignUp() {
                   />
                 </div>
 
-                <div className="pb-[26px]">
+                <div className="pb-[30px]">
                   <label
                     htmlFor="verify-password"
                     className="block font-medium text-left text-sm pb-[10px]"

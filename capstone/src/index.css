@@ -16,3 +16,21 @@ body {
 .sidebar-menu {
   @apply flex gap-[14px] items-center p-[14px];
 }
+
+.currency {
+  @apply px-[10px] py-[10px];
+}
+
+.currency .avatar {
+  @apply bg-blue-100;
+}
+
+.currency-selected .avatar,
+.currency:hover .avatar {
+  @apply bg-blue-50;
+}
+
+.currency-selected,
+.currency:hover {
+  @apply bg-blue-100 rounded-md px-[10px] py-[10px];
+}
