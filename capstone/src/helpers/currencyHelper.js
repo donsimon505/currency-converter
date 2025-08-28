@@ -1,4 +1,4 @@
-import currencies from "./currencies.json";
+import currencies from "../currencies.json";
 
 // Fetching Currency flag Url
 
