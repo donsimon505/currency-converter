@@ -4,7 +4,7 @@ import axios from "axios";
 const API_KEY = import.meta.env.VITE_CURRENCY_CONVERTER_KEY;
 const BASE_URL = "https://v6.exchangerate-api.com/v6";
 
-const useCurrencyStore = create((set) => ({
+const useCurrencyStore = create((set, get) => ({
   amount: "",
   fromCurrency: "USD",
   toCurrency: "GBP",
@@ -19,6 +19,8 @@ const useCurrencyStore = create((set) => ({
   setToCurrency: (currencyCode) => set({ toCurrency: currencyCode }),
 
   convertCurrency: async () => {
+    const { fromCurrency, toCurrency, amount } = get();
+
     set({ loading: true, error: null, result: null });
 
     try {

@@ -1,9 +1,32 @@
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
+import useCurrencyStore from "../stores/useCurrencyStore.js";
+
 function Converter() {
+  const {
+    amount,
+    fromCurrency,
+    toCurrency,
+    result,
+    rate,
+    error,
+    lastUpdated,
+    setAmount,
+    setFromCurrency,
+    setToCurrency,
+    convertCurrency,
+    loading,
+  } = useCurrencyStore();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("From:", fromCurrency, "To:", toCurrency, "Amount:", amount);
+    convertCurrency();
+  };
+
   return (
     <>
       <div className="converter flex flex-col w-full p-[30px] py-[40px] md:p-[40px] gap-[20px] bg-white rounded-xl shadow-xs">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="pb-[30px]">
             <label
               htmlFor="amount"
@@ -17,6 +40,8 @@ function Converter() {
               step="0.01"
               min="0"
               placeholder="100.00"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
               className="w-full p-[14px] border border-slate-400 focus:border-black rounded focus:shadow-sm text-sm md:text-2xl"
             />
           </div>
@@ -33,11 +58,13 @@ function Converter() {
                 <select
                   name="from_currency"
                   id="from_currency"
+                  value={fromCurrency}
+                  onChange={(e) => setFromCurrency(e.target.value)}
                   className="w-full p-[14px] pr-10 appearance-none border border-slate-400 focus:border-black rounded 
                       focus:shadow-sm text-sm md:text-base"
                 >
-                  <option value="usd">USD - US Dollar</option>
-                  <option value="gbp">GBP - British Pound</option>
+                  <option value="USD">USD - US Dollar</option>
+                  <option value="GBP">GBP - British Pound</option>
                 </select>
 
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -72,11 +99,13 @@ function Converter() {
                 <select
                   name="to_currency"
                   id="to_currency"
+                  value={toCurrency}
+                  onChange={(e) => setToCurrency(e.target.value)}
                   className="w-full p-[14px] pr-10 appearance-none border border-slate-400 focus:border-black rounded 
                       focus:shadow-sm text-sm md:text-base"
                 >
-                  <option value="usd">USD - US Dollar</option>
-                  <option value="gbp">GBP - British Pound</option>
+                  <option value="USD">USD - US Dollar</option>
+                  <option value="GBP">GBP - British Pound</option>
                 </select>
 
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -99,40 +128,56 @@ function Converter() {
 
           <button
             type="submit"
+            disabled={loading}
             className="bg-blue-600 text-white text-sm md:text-base w-full px-[10px] py-[18px] rounded-md my-[10px] md:mt-[28px] 
                 md:mb-[20px]"
           >
-            Convert
+            {loading ? "Converting..." : "Convert"}
           </button>
         </form>
 
-        <div className="results-success flex flex-col gap-[12px] text-center w-full">
-          <h3 className="text-neutral-500 text-md md:text-lg">
-            Converted Amount
-          </h3>
-          <div className="flex flex-col gap-[10px]">
-            <div className="flex flex-col gap-[7px]">
-              <h1 className="text-blue-600 font-semibold text-4xl md:text-5xl tracking-wide">
-                £85.00
-              </h1>
-              <p className="text-neutral-500 text-md">1 USD = 0.8500 GBP</p>
+        {result && !error && (
+          <div className="results-success flex flex-col gap-[12px] text-center w-full">
+            <h3 className="text-neutral-500 text-md md:text-lg">
+              Converted Amount
+            </h3>
+            <div className="flex flex-col gap-[10px]">
+              <div className="flex flex-col gap-[7px]">
+                <h1 className="text-blue-600 font-semibold text-4xl md:text-5xl tracking-wide">
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: toCurrency,
+                  }).format(result)}
+                </h1>
+                <p className="text-neutral-500 text-md">
+                  1 {fromCurrency} = {rate?.toFixed(4)} {toCurrency}
+                </p>
+              </div>
+              {lastUpdated && (
+                <p className="text-gray-400 text-sm">
+                  Last updated:{" "}
+                  {new Date(lastUpdated).toLocaleString("en-GB", {
+                    dateStyle: "medium",
+                    timeStyle: "short",
+                  })}
+                </p>
+              )}
             </div>
-            <p className="text-gray-400 text-sm">
-              Last updated: Oct 26, 2025, 10:30 AM GMT
-            </p>
           </div>
-        </div>
+        )}
 
-        <div className="results-error flex flex-col gap-[12px] text-center w-full">
-          <h3 className="text-neutral-500 text-md md:text-lg">Sorry</h3>
-          <div className="flex flex-col gap-[10px]">
-            <div className="flex flex-col gap-[7px]">
-              <h1 className="text-blue-600 font-semibold text-4xl md:text-2xl tracking-wide">
-                Error connecting to API
-              </h1>
+        {error && (
+          <div className="results-error flex flex-col gap-[12px] text-center w-full">
+            <h3 className="text-neutral-500 text-md md:text-lg">Sorry</h3>
+            <div className="flex flex-col gap-[10px]">
+              <div className="flex flex-col gap-[7px]">
+                <h1 className="text-blue-600 font-semibold text-4xl md:text-2xl tracking-wide">
+                  {error}
+                </h1>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );
