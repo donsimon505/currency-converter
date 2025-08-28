@@ -34,7 +34,7 @@ export const getCurrencyData = (currencyCode) => {
   if (!base) return null;
 
   return {
-    code: currencyCode,
+    currencycode: currencyCode,
     ...base,
     flag: getCurrencyFlag(currencyCode),
   };
@@ -42,6 +42,6 @@ export const getCurrencyData = (currencyCode) => {
 
 // Listing all supported currencies for API
 export const listAllCurrencies = () =>
-  Object.keys(currencies).map((code) => getCurrencyData(code));
+  Object.keys(currencies).map((currencycode) => getCurrencyData(currencycode));
 
 export default currencies;

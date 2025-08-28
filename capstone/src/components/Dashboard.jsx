@@ -2,15 +2,8 @@ import Sidebar from "./Sidebar";
 import DashboardMobileMenu from "./DashboardMobileMenu";
 import Converter from "./Converter";
 import Footer from "./Footer";
-import { getCurrencyData, listAllCurrencies } from "../helpers/currencyHelper";
 
 function Dashboard() {
-  const usd = getCurrencyData("USD");
-  console.log(usd);
-
-  const allCurrencies = listAllCurrencies();
-  console.log(allCurrencies.length);
-
   return (
     <>
       <DashboardMobileMenu />

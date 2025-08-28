@@ -14,6 +14,8 @@ function Converter() {
             <input
               type="number"
               id="amount"
+              step="0.01"
+              min="0"
               placeholder="100.00"
               className="w-full p-[14px] border border-slate-400 focus:border-black rounded focus:shadow-sm text-sm md:text-2xl"
             />
@@ -104,7 +106,7 @@ function Converter() {
           </button>
         </form>
 
-        <div className="results flex flex-col gap-[12px] text-center w-full">
+        <div className="results-success flex flex-col gap-[12px] text-center w-full">
           <h3 className="text-neutral-500 text-md md:text-lg">
             Converted Amount
           </h3>
@@ -118,6 +120,17 @@ function Converter() {
             <p className="text-gray-400 text-sm">
               Last updated: Oct 26, 2025, 10:30 AM GMT
             </p>
+          </div>
+        </div>
+
+        <div className="results-error flex flex-col gap-[12px] text-center w-full">
+          <h3 className="text-neutral-500 text-md md:text-lg">Sorry</h3>
+          <div className="flex flex-col gap-[10px]">
+            <div className="flex flex-col gap-[7px]">
+              <h1 className="text-blue-600 font-semibold text-4xl md:text-2xl tracking-wide">
+                Error connecting to API
+              </h1>
+            </div>
           </div>
         </div>
       </div>
