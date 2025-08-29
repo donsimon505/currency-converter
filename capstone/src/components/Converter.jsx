@@ -1,7 +1,7 @@
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
 import Select from "react-select";
 import useCurrencyStore from "../stores/useCurrencyStore.js";
-import currencies from "../currencies.json";
+import useCurrencyFavouriteStore from "../stores/useCurrencyFavouriteStore.js";
 import { getCurrencyData } from "../helpers/currencyHelper.js";
 
 function Converter() {
@@ -20,8 +20,10 @@ function Converter() {
     loading,
   } = useCurrencyStore();
 
+  const { favouriteCurrencies } = useCurrencyFavouriteStore();
+
   // For Select Options
-  const currencyOptions = Object.keys(currencies).map((currencyCode) => {
+  const currencyOptions = favouriteCurrencies.map((currencyCode) => {
     const data = getCurrencyData(currencyCode);
     return {
       value: currencyCode,

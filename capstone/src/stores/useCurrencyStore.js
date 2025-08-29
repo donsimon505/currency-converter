@@ -6,8 +6,8 @@ const BASE_URL = "https://v6.exchangerate-api.com/v6";
 
 const useCurrencyStore = create((set, get) => ({
   amount: "",
-  fromCurrency: "USD",
-  toCurrency: "GBP",
+  fromCurrency: "",
+  toCurrency: "",
   result: null,
   rate: null,
   loading: false,
