@@ -87,21 +87,6 @@ function Converter() {
                   value={selectedFrom}
                   onChange={(opt) => setFromCurrency(opt.value)}
                 />
-
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                  <svg
-                    className="h-4 w-4 text-gray-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.24 4.64a.75.75 0 01-1.08 0l-4.24-4.64a.75.75 0 01.02-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
               </div>
             </div>
 
@@ -122,21 +107,6 @@ function Converter() {
                   value={selectedTo}
                   onChange={(opt) => setToCurrency(opt.value)}
                 />
-
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                  <svg
-                    className="h-4 w-4 text-gray-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.24 4.64a.75.75 0 01-1.08 0l-4.24-4.64a.75.75 0 01.02-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
               </div>
             </div>
           </div>
@@ -159,10 +129,7 @@ function Converter() {
             <div className="flex flex-col gap-[10px]">
               <div className="flex flex-col gap-[7px]">
                 <h1 className="text-blue-600 font-semibold text-4xl md:text-5xl tracking-wide">
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: toCurrency,
-                  }).format(result)}
+                  {getCurrencyData(toCurrency).symbol} {result}
                 </h1>
                 <p className="text-neutral-500 text-md">
                   1 {fromCurrency} = {rate?.toFixed(4)} {toCurrency}

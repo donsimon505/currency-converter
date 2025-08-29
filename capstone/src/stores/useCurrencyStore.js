@@ -14,9 +14,11 @@ const useCurrencyStore = create((set, get) => ({
   error: null,
   lastUpdated: null,
 
-  setAmount: (value) => set({ amount: value }),
-  setFromCurrency: (currencyCode) => set({ fromCurrency: currencyCode }),
-  setToCurrency: (currencyCode) => set({ toCurrency: currencyCode }),
+  setAmount: (value) => set({ amount: value, result: null, rate: null }),
+  setFromCurrency: (currencyCode) =>
+    set({ fromCurrency: currencyCode, result: null, rate: null }),
+  setToCurrency: (currencyCode) =>
+    set({ toCurrency: currencyCode, result: null, rate: null }),
 
   convertCurrency: async () => {
     const { fromCurrency, toCurrency, amount } = get();
