@@ -16,7 +16,7 @@ function FavouriteCurrenciesCard() {
           </p>
         </div>
         <hr className="text-blue-100" />
-        <div className="favourite-list flex flex-col gap-[28px] px-[10px]">
+        <div className="favourite-list flex flex-col gap-[28px] px-[10px] h-[300px] overflow-y-auto">
           {favouriteCurrencies.length === 0 ? (
             <p className="text-neutral-400 text-sm">No favourites added yet</p>
           ) : (
