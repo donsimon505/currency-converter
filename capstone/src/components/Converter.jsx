@@ -128,8 +128,9 @@ function Converter() {
             </h3>
             <div className="flex flex-col gap-[10px]">
               <div className="flex flex-col gap-[7px]">
-                <h1 className="text-blue-600 font-semibold text-4xl md:text-5xl tracking-wide">
-                  {getCurrencyData(toCurrency).symbol} {result}
+                <h1 className="text-blue-600 font-semibold text-4xl md:text-5xl tracking-wider">
+                  {getCurrencyData(toCurrency).symbol}
+                  {result.toLocaleString("en-GB")}
                 </h1>
                 <p className="text-neutral-500 text-md">
                   1 {fromCurrency} = {rate?.toFixed(4)} {toCurrency}

@@ -17,7 +17,7 @@ function Favourites() {
           >
             <div className="flex flex-col gap-[6px] text-center lg:text-left">
               <h1 className="text-4xl lg:text-3xl font-semibold text-blue-600">
-                Settings
+                Favourites
               </h1>
               <p className="text-base md:text-lg font-normal text-neutral-500">
                 Manage your favourite currencies

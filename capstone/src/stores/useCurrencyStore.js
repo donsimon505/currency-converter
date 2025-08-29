@@ -45,7 +45,7 @@ const useCurrencyStore = create((set, get) => ({
       }
     } catch (err) {
       set({
-        error: err.message || "Error Fetching Exchange from Provider",
+        error: "Error Fetching Exchange from Provider",
         loading: false,
       });
     }
