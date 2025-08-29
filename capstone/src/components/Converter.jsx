@@ -1,5 +1,8 @@
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline";
+import Select from "react-select";
 import useCurrencyStore from "../stores/useCurrencyStore.js";
+import currencies from "../currencies.json";
+import { getCurrencyData } from "../helpers/currencyHelper.js";
 
 function Converter() {
   const {
@@ -17,9 +20,33 @@ function Converter() {
     loading,
   } = useCurrencyStore();
 
+  // For Select Options
+  const currencyOptions = Object.keys(currencies).map((currencyCode) => {
+    const data = getCurrencyData(currencyCode);
+    return {
+      value: currencyCode,
+      label: (
+        <div className="flex flex-row items-center gap-[8px]">
+          <img
+            src={data.flag}
+            alt={`${currencyCode} flag`}
+            className="w-[20px] h-[14px] object-cover"
+          />
+          <span>
+            {currencyCode} - {data.name}
+          </span>
+        </div>
+      ),
+    };
+  });
+
+  const selectedFrom = currencyOptions.find(
+    (opt) => opt.value === fromCurrency
+  );
+  const selectedTo = currencyOptions.find((opt) => opt.value === toCurrency);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("From:", fromCurrency, "To:", toCurrency, "Amount:", amount);
     convertCurrency();
   };
 
@@ -55,17 +82,11 @@ function Converter() {
                 From
               </label>
               <div className="relative w-full">
-                <select
-                  name="from_currency"
-                  id="from_currency"
-                  value={fromCurrency}
-                  onChange={(e) => setFromCurrency(e.target.value)}
-                  className="w-full p-[14px] pr-10 appearance-none border border-slate-400 focus:border-black rounded 
-                      focus:shadow-sm text-sm md:text-base"
-                >
-                  <option value="USD">USD - US Dollar</option>
-                  <option value="GBP">GBP - British Pound</option>
-                </select>
+                <Select
+                  options={currencyOptions}
+                  value={selectedFrom}
+                  onChange={(opt) => setFromCurrency(opt.value)}
+                />
 
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                   <svg
@@ -84,7 +105,7 @@ function Converter() {
               </div>
             </div>
 
-            <div className="p-[10px] bg-blue-600 rounded-full mb-[10px]">
+            <div className="p-[10px] bg-blue-600 rounded-full">
               <ArrowsRightLeftIcon className="size-4 text-white" />
             </div>
 
@@ -96,17 +117,11 @@ function Converter() {
                 To
               </label>
               <div className="relative w-full">
-                <select
-                  name="to_currency"
-                  id="to_currency"
-                  value={toCurrency}
-                  onChange={(e) => setToCurrency(e.target.value)}
-                  className="w-full p-[14px] pr-10 appearance-none border border-slate-400 focus:border-black rounded 
-                      focus:shadow-sm text-sm md:text-base"
-                >
-                  <option value="USD">USD - US Dollar</option>
-                  <option value="GBP">GBP - British Pound</option>
-                </select>
+                <Select
+                  options={currencyOptions}
+                  value={selectedTo}
+                  onChange={(opt) => setToCurrency(opt.value)}
+                />
 
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                   <svg
