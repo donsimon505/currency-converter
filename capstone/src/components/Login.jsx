@@ -1,7 +1,26 @@
 import Footer from "./Footer";
 import Header from "./Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import useAuthStore from "../stores/useAuthStore";
 function Login() {
+  const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await login(email, password);
+      navigate("/dashboard");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col min-h-screen">
@@ -20,7 +39,10 @@ function Login() {
                   Please enter your details to log in
                 </p>
               </div>
-              <form>
+
+              {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+
+              <form onSubmit={handleSubmit} className="mt-6">
                 <div className="pb-[30px]">
                   <label
                     htmlFor="email"
@@ -31,6 +53,8 @@ function Login() {
                   <input
                     type="email"
                     id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
                     className="w-full p-[14px] border border-slate-400 focus:border-black rounded focus:shadow-sm text-sm md:text-base"
                   />
@@ -46,6 +70,8 @@ function Login() {
                   <input
                     type="password"
                     id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Please enter your password"
                     className="w-full p-[14px] border border-slate-400 focus:border-black rounded focus:shadow-sm text-sm md:text-base"
                   />
