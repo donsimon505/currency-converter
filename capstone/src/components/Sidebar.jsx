@@ -4,7 +4,7 @@ import {
   CogIcon,
   ArrowRightStartOnRectangleIcon,
 } from "@heroicons/react/24/outline";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 
 function Sidebar() {
@@ -27,7 +27,7 @@ function Sidebar() {
       <div className="sidebar hidden lg:flex flex-col md:w-2/6 lg:w-1/4 bg-white min-h-screen fixed shadow-sm pt-[30px] pb-[30px] justify-between">
         <div className="flex flex-col gap-[25px]">
           <div className="flex flex-row lg:flex-1 pl-[30px] pr-[30px]">
-            <Link to="/dashboard" className="-m-1.5 p-1.5 items-center">
+            <NavLink to="/dashboard" className="-m-1.5 p-1.5 items-center">
               <span className="sr-only">Currency Converter</span>
               <div className="flex flex-row gap-[10px] md:gap-[18px] items-center">
                 <img
@@ -39,26 +39,41 @@ function Sidebar() {
                   Currency Converter
                 </h3>
               </div>
-            </Link>
+            </NavLink>
           </div>
           <hr className="text-blue-100" />
           <div className="pl-[30px] pr-[30px]">
             <ul className="flex flex-col gap-[8px]">
-              <Link to="/dashboard">
-                <li className="sidebar-menu menu-hover menu-active">
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  `${isActive ? "menu-active" : "menu-hover"}`
+                }
+              >
+                <li className="sidebar-menu">
                   <HomeIcon className="size-4" /> Dashboard
                 </li>
-              </Link>
-              <Link to="/favourites">
-                <li className="sidebar-menu menu-hover">
+              </NavLink>
+              <NavLink
+                to="/favourites"
+                className={({ isActive }) =>
+                  `${isActive ? "menu-active" : "menu-hover"}`
+                }
+              >
+                <li className="sidebar-menu">
                   <CurrencyDollarIcon className="size-4" /> Favourites
                 </li>
-              </Link>
-              <Link to="/settings">
-                <li className="sidebar-menu menu-hover">
+              </NavLink>
+              <NavLink
+                to="/settings"
+                className={({ isActive }) =>
+                  `${isActive ? "menu-active" : "menu-hover"}`
+                }
+              >
+                <li className="sidebar-menu">
                   <CogIcon className="size-4" /> Settings
                 </li>
-              </Link>
+              </NavLink>
               <button
                 onClick={handleLogout}
                 className="sidebar-menu menu-hover flex items-center w-full"
