@@ -1,10 +1,28 @@
 import { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Dialog, DialogPanel } from "@headlessui/react";
+import useAuthStore from "../stores/useAuthStore";
 
 function DashboardMobileMenu() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const { logOut } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      setMobileMenuOpen(false);
+
+      setTimeout(() => {
+        navigate("/");
+      }, 100);
+    } catch (error) {
+      console.error("Logout failed: ", error);
+    }
+  };
+
   return (
     <>
       <header className="bg-white">
@@ -81,12 +99,13 @@ function DashboardMobileMenu() {
                   </Link>
                 </div>
                 <div className="py-6">
-                  <Link
-                    to="/dashboard"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 -mx-3 rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900
+                     hover:bg-gray-50"
                   >
                     Log out
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

@@ -16,9 +16,11 @@ function Sidebar() {
     navigate("/");
   };
 
-  const dp = currentUser.displayName
-    ? currentUser.displayName.charAt(0).toUpperCase()
-    : currentUser.email.charAt(0).toUpperCase();
+  const dp = currentUser
+    ? currentUser.displayName
+      ? currentUser.displayName.charAt(0).toUpperCase()
+      : currentUser.email.charAt(0).toUpperCase()
+    : "U";
 
   return (
     <>
@@ -74,9 +76,11 @@ function Sidebar() {
             </div>
             <div className="flex flex-col gap-[2px]">
               <h1 className="text-sm font-bold">
-                {currentUser.displayName || "Anonymous User"}
+                {currentUser?.displayName || "Anonymous User"}
               </h1>
-              <h3 className="text-xs text-blue-500">{currentUser.email}</h3>
+              <h3 className="text-xs text-blue-500">
+                {currentUser?.email || "No email"}
+              </h3>
             </div>
           </div>
         </div>
