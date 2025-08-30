@@ -1,7 +1,5 @@
 # Currency Converter – ALX Front‑end Capstone Project
 
-**Developer‑Focused README**
-
 This project is a **React‑based Currency Converter** featuring authentication, state management, and responsive UI.
 
 ---
