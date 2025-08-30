@@ -6,8 +6,14 @@ import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Settings from "./components/Settings";
 import Favourites from "./components/Favourites";
+import useAuthStore from "./stores/useAuthStore";
 
 function App() {
+  const { loading } = useAuthStore();
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <Router>
       <Routes>

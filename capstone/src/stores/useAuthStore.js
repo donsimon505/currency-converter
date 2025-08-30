@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { auth } from "../firebase";
 import {
-  createUserWithEmailandPassword,
-  signInWithEmailandPassword,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
@@ -12,11 +12,11 @@ const useAuthStore = create((set) => ({
   loading: true,
 
   signUp: async (email, password) => {
-    await createUserWithEmailandPassword(auth, email, password);
+    await createUserWithEmailAndPassword(auth, email, password);
   },
 
   logIn: async (email, password) => {
-    await signInWithEmailandPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password);
   },
 
   logOut: async () => {
