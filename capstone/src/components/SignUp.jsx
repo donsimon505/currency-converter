@@ -3,6 +3,7 @@ import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAuthStore from "../stores/useAuthStore.js";
+import { getFirebaseErrorMessage } from "../utils/errorUtils";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function SignUp() {
       await signUp(email, password, fullname);
       navigate("/dashboard");
     } catch (err) {
-      setError(err.message);
+      setError(getFirebaseErrorMessage(err));
     }
   };
 

@@ -6,6 +6,7 @@ import {
   EmailAuthProvider,
   reauthenticateWithCredential,
 } from "firebase/auth";
+import { getFirebaseErrorMessage } from "../utils/errorUtils";
 
 function SettingsCard() {
   const { currentUser } = useAuthStore();
@@ -41,16 +42,7 @@ function SettingsCard() {
     } catch (error) {
       console.error(error);
 
-      if (error.code === "auth/wrong-password") {
-        setMessage({ text: "Incorrect old password.", type: "error" });
-      } else if (error.code === "auth/weak-password") {
-        setMessage({
-          text: "New password should be at least 6 characters",
-          type: "error",
-        });
-      } else {
-        setMessage({ text: error.message, type: "error" });
-      }
+      setMessage({ text: getFirebaseErrorMessage(error), type: "error" });
     }
 
     setLoading(false);

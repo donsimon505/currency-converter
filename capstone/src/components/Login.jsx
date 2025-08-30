@@ -3,6 +3,7 @@ import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useAuthStore from "../stores/useAuthStore";
+import { getFirebaseErrorMessage } from "../utils/errorUtils";
 function Login() {
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.logIn);
@@ -17,7 +18,7 @@ function Login() {
       await login(email, password);
       navigate("/dashboard");
     } catch (err) {
-      setError(err.message);
+      setError(getFirebaseErrorMessage(err));
     }
   };
 
