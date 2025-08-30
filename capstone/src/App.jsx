@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Settings from "./components/Settings";
 import Favourites from "./components/Favourites";
+import ProtectedRoute from "./components/ProtectedRoute";
 import useAuthStore from "./stores/useAuthStore";
 
 function App() {
@@ -20,9 +21,31 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/favourites" element={<Favourites />} />
-        <Route path="/settings" element={<Settings />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/favourites"
+          element={
+            <ProtectedRoute>
+              <Favourites />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
