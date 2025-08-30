@@ -6,8 +6,9 @@ import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Settings from "./components/Settings";
 import Favourites from "./components/Favourites";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/route-components/ProtectedRoute";
 import useAuthStore from "./stores/useAuthStore";
+import PublicRoute from "./components/route-components/PublicRoute";
 
 function App() {
   const { loading } = useAuthStore();
@@ -19,8 +20,22 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/sign-up"
+          element={
+            <PublicRoute>
+              <SignUp />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
 
         <Route
           path="/dashboard"
