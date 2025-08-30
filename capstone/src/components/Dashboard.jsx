@@ -2,8 +2,15 @@ import Sidebar from "./Sidebar";
 import DashboardMobileMenu from "./DashboardMobileMenu";
 import Converter from "./Converter";
 import Footer from "./Footer";
+import useAuthStore from "../stores/useAuthStore";
 
 function Dashboard() {
+  const { currentUser } = useAuthStore();
+
+  const firstname = currentUser?.displayName
+    ? currentUser.displayName.split(" ")[0]
+    : "Unknown User";
+
   return (
     <>
       <DashboardMobileMenu />
@@ -16,7 +23,7 @@ function Dashboard() {
           >
             <div className="flex flex-col gap-[6px] text-center lg:text-left">
               <h1 className="text-4xl lg:text-3xl font-semibold text-blue-600">
-                Welcome John
+                Welcome {firstname}
               </h1>
               <p className="text-base md:text-lg font-normal text-neutral-500">
                 Convert currencies with ease and confidence
