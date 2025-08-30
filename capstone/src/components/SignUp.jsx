@@ -21,7 +21,7 @@ function SignUp() {
       return;
     }
     try {
-      await signUp(email, password);
+      await signUp(email, password, fullname);
       navigate("/dashboard");
     } catch (err) {
       setError(err.message);

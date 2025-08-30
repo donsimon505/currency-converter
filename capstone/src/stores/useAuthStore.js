@@ -5,14 +5,27 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 
 const useAuthStore = create((set) => ({
   currentUser: null,
   loading: true,
 
-  signUp: async (email, password) => {
-    await createUserWithEmailAndPassword(auth, email, password);
+  signUp: async (email, password, fullname) => {
+    const userCred = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    if (fullname) {
+      await updateProfile(userCred.user, {
+        displayName: fullname,
+      });
+    }
+
+    set({ currentUser: userCred.user });
   },
 
   logIn: async (email, password) => {

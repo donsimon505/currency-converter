@@ -4,9 +4,22 @@ import {
   CogIcon,
   ArrowRightStartOnRectangleIcon,
 } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuthStore from "../stores/useAuthStore";
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const { currentUser, logOut } = useAuthStore();
+
+  const handleLogout = () => {
+    logOut();
+    navigate("/");
+  };
+
+  const dp = currentUser.displayName
+    ? currentUser.displayName.charAt(0).toUpperCase()
+    : currentUser.email.charAt(0).toUpperCase();
+
   return (
     <>
       <div className="sidebar hidden lg:flex flex-col md:w-2/6 lg:w-1/4 bg-white min-h-screen fixed shadow-sm pt-[30px] pb-[30px] justify-between">
@@ -44,25 +57,26 @@ function Sidebar() {
                   <CogIcon className="size-4" /> Settings
                 </li>
               </Link>
-              <Link to="/dashboard">
-                <li className="sidebar-menu menu-hover">
-                  <ArrowRightStartOnRectangleIcon className="size-4" /> Log out
-                </li>
-              </Link>
+              <button
+                onClick={handleLogout}
+                className="sidebar-menu menu-hover flex items-center w-full"
+              >
+                <ArrowRightStartOnRectangleIcon className="size-4" /> Log out
+              </button>
             </ul>
           </div>
         </div>
         <div className="flex flex-col gap-[25px]">
           <hr className="text-blue-100" />
           <div className="flex flex-row gap-[16px] pl-[30px] pr-[30px]">
-            <img
-              src="/src/assets/profile-img.jpg"
-              alt="Profile Image"
-              className="w-[38px] h-auto rounded-full"
-            />
+            <div className="bg-blue-100 flex flex-col text-center items-center justify-center rounded-full px-4 py-3">
+              <h4 className="text-xs font-bold text-blue-600">{dp}</h4>
+            </div>
             <div className="flex flex-col gap-[2px]">
-              <h1 className="text-sm font-bold">John Doe</h1>
-              <h3 className="text-xs text-blue-500">johndoe@example.com</h3>
+              <h1 className="text-sm font-bold">
+                {currentUser.displayName || "Anonymous User"}
+              </h1>
+              <h3 className="text-xs text-blue-500">{currentUser.email}</h3>
             </div>
           </div>
         </div>

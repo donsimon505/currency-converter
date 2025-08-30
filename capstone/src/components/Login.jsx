@@ -5,7 +5,7 @@ import { useState } from "react";
 import useAuthStore from "../stores/useAuthStore";
 function Login() {
   const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);
+  const login = useAuthStore((state) => state.logIn);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
